@@ -1,0 +1,15 @@
+﻿<Application x:Class="RenameFile.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RenameFile"
+             StartupUri="MainWindow.xaml"
+             xmlns:resource="clr-namespace:RenameFile.Properties">
+    <Application.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StringResources.vi-VN.xaml" />
+                <ResourceDictionary Source="StringResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
