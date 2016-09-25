@@ -52,10 +52,9 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="btnPath" Content="Chọn đường dẫn" HorizontalAlignment="Left" Margin="328,27,0,0" VerticalAlignment="Top" Width="98" Click="btnPath_Click" Grid.Column="1" Height="20"/>
         <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="23" Margin="10,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txtInput_TextChanged" Width="302" Grid.Column="1"/>
-        <CheckBox x:Name="chkKeepFile" Content="Không đổi tên file"  Grid.Column="1" Margin="66,95,940,24" />
-        <CheckBox x:Name="chkKeepFolder" Content="Không đổi tên thư mục" Grid.Column="1" Margin="66,119,940,0" />
-
-        <CheckBox x:Name="chkIncludeSubfolder" Content="Bao gồm thư mục con" Grid.Column="1" Margin="66,152,940,319" />
+        <CheckBox x:Name="chkKeepFile" Content="Không đổi tên file"  Grid.Column="1" Margin="32,294,974,174"  />
+        <CheckBox x:Name="chkKeepFolder" Content="Không đổi tên thư mục" Grid.Column="1" Margin="32,321,974,151" />
+        <CheckBox x:Name="chkIncludeSubfolder" Content="Bao gồm thư mục con" Grid.Column="1" Margin="32,346,974,125" />
         <Label x:Name="lbFileNumber" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="32,51,0,0" VerticalAlignment="Top"/>
         <ListView x:Name="listviewFile" Grid.Column="1" HorizontalAlignment="Left" Height="254" Margin="431,26,0,0" VerticalAlignment="Top" Width="614">
             <ListView.View>
@@ -67,5 +66,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <RadioButton x:Name="raToFirstUpper" Content="Viết Hoa Chữ Đầu" Grid.Column="1" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="raLowerCase" Content="viết thường toàn bộ" Grid.Column="1" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="raRemoveSpace" Content="LoạiBỏKhoảngTrắng" Grid.Column="1" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="raUpperAll" Content="VIẾT HOA TOÀN BỘ" Grid.Column="1" HorizontalAlignment="Left" Margin="139,65,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="raOnlyUpperFirstWord" Content="Viết hoa chữ cái đầu tiên" Grid.Column="1" HorizontalAlignment="Left" Margin="139,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="raRestoreSpace" Content="Phục Hồi Khoảng Trắng" Grid.Column="1" HorizontalAlignment="Left" Margin="139,108,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnRename" Content="Rename" Grid.Column="1" HorizontalAlignment="Left" Margin="32,387,0,0" VerticalAlignment="Top" Width="75" Click="btnRename_Click"/>
     </Grid>
 </Window>

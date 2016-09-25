@@ -94,7 +94,6 @@ namespace RenameFile
 
         private void btnPath_Click(object sender, RoutedEventArgs e)
         {
-            listviewFile.Items.Clear();
             var dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
             dialog.Title = "Bạn hãy chọn folder mà bạn muốn rename!";
@@ -216,6 +215,9 @@ namespace RenameFile
             //return tongSofile;
         }
 
-      
+        private void btnRename_Click(object sender, RoutedEventArgs e)
+        {
+                     
+        }
     }
 }
