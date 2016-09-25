@@ -8,6 +8,51 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="564.025" Width="1175.525">
     <Window.Resources>
+        <Style x:Key="BaseButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#2e9fff" />
+            <Setter Property="BorderBrush" Value="#1a7bb9"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="Chrome"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter Name="Presenter" Margin="{TemplateBinding Padding}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#333333" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                
+                                <Setter Property="Background" Value="#1a7bb9" />
+                                <Setter Property="BorderBrush" Value="#1ab394"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#2e9fff" />
+                                <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                <Setter Property="Foreground" Value="#ffffff"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <SolidColorBrush x:Key="ListBorder" Color="#828790"/>
         <Style x:Key="lvFile" TargetType="{x:Type ListView}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -45,6 +90,7 @@
             </Setter>
         </Style>
     </Window.Resources>
+   
     <Grid Margin="0,1,0,0" RenderTransformOrigin="0.593,0.522">
         <Button x:Name="btnPath" Content="Chọn đường dẫn" HorizontalAlignment="Left" Margin="328,27,0,0" VerticalAlignment="Top" Width="98" Click="btnPath_Click" Grid.Column="1" Height="20"/>
         <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="23" Margin="10,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txtInput_TextChanged" Width="302" Grid.Column="1"/>
@@ -67,12 +113,12 @@
         </GroupBox>
         <Grid Margin="-2,440,740,-2">
 
-            <Button x:Name="btnRename_Copy" Content="Undo"  Click="btnRename_Click" Margin="24,11,291,56"               />
-            <Button x:Name="btnRename_Copy1" Content="Reset form"  Click="btnRename_Click" Margin="151,11,164,56"               />
-            <Button x:Name="btnRename_Copy2" Content="Phóng to kết quả"  Click="btnRename_Click" Margin="282,11,33,56" RenderTransformOrigin="1.027,0.727"               />
-            <Button x:Name="btnRename_Copy3" Content="Xem thử trước"  Click="btnRename_Click" Margin="151,59,164,10"               />
-            <Button x:Name="btnRename_Copy4" Content="Xuất kết quả ra file"  Click="btnRename_Click" Margin="282,59,33,10"               />
-            <Button x:Name="btnRename" Content="Rename"  Click="btnRename_Click" Margin="24,59,291,10"               />
+            <Button Style="{StaticResource BaseButtonStyle}" x:Name="btnRename_Copy" Content="Undo"  Click="btnRename_Click" Margin="24,11,291,56"               />
+            <Button Style="{StaticResource BaseButtonStyle}" x:Name="btnRename_Copy1" Content="Reset form"  Click="btnRename_Click" Margin="151,11,164,56"               />
+            <Button Style="{StaticResource BaseButtonStyle}" x:Name="btnRename_Copy2" Content="Phóng to kết quả"  Click="btnRename_Click" Margin="282,11,33,56" RenderTransformOrigin="1.027,0.727"               />
+            <Button Style="{StaticResource BaseButtonStyle}" x:Name="btnRename_Copy3" Content="Xem thử trước"  Click="btnRename_Click" Margin="151,59,164,10"               />
+            <Button Style="{StaticResource BaseButtonStyle}" x:Name="btnRename_Copy4" Content="Xuất kết quả ra file"  Click="btnRename_Click" Margin="282,59,33,10"               />
+            <Button Style="{StaticResource BaseButtonStyle}" x:Name="btnRename" Content="Rename"  Click="btnRename_Click" Margin="24,59,291,10"               />
 
 
         </Grid>
