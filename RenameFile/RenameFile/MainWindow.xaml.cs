@@ -125,7 +125,7 @@ namespace RenameFile
         private void RrefreshFilename(string inputText)
         {
             sofile = 0;
-            listviewFile.ItemsSource = null;
+            listviewFile.ItemsSource=null;
             //listviewFile.Sorting = SortOrder.None; todo
 
 

@@ -45,26 +45,27 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Margin="-194,0,0,0">
+    <Grid Margin="0,1,0,0" RenderTransformOrigin="0.593,0.522">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="175*"/>
-            <ColumnDefinition Width="1166*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnPath" Content="Chọn đường dẫn" HorizontalAlignment="Left" Margin="233,26,0,0" VerticalAlignment="Top" Width="142" Click="btnPath_Click" Grid.Column="1" Height="20"/>
-        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="23" Margin="19,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txtInput_TextChanged" Width="195" Grid.Column="1"/>
+        <Button x:Name="btnPath" Content="Chọn đường dẫn" HorizontalAlignment="Left" Margin="328,27,0,0" VerticalAlignment="Top" Width="98" Click="btnPath_Click" Grid.Column="1" Height="20"/>
+        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="23" Margin="10,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txtInput_TextChanged" Width="302" Grid.Column="1"/>
         <CheckBox x:Name="chkKeepFile" Content="Không đổi tên file"  Grid.Column="1" Margin="66,95,940,24" />
         <CheckBox x:Name="chkKeepFolder" Content="Không đổi tên thư mục" Grid.Column="1" Margin="66,119,940,0" />
-        <ListView x:Name="listviewFile" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="417,20,0,0" VerticalAlignment="Top" Width="257" Style="{DynamicResource lvFile}">
+
+        <CheckBox x:Name="chkIncludeSubfolder" Content="Bao gồm thư mục con" Grid.Column="1" Margin="66,152,940,319" />
+        <Label x:Name="lbFileNumber" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="32,51,0,0" VerticalAlignment="Top"/>
+        <ListView x:Name="listviewFile" Grid.Column="1" HorizontalAlignment="Left" Height="254" Margin="431,26,0,0" VerticalAlignment="Top" Width="614">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Tên cũ" Width="120" DisplayMemberBinding="{Binding OldName}" />
-                    <GridViewColumn Header="Tên mới" Width="50" DisplayMemberBinding="{Binding NewName}" />
+                    <GridViewColumn Header="Tên mới" Width="120" DisplayMemberBinding="{Binding NewName}" />
                     <GridViewColumn Header="Đường dẫn" Width="150" DisplayMemberBinding="{Binding Path}" />
                     <GridViewColumn Header="Ngày cập nhật" Width="150" DisplayMemberBinding="{Binding LastWriteTime}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <CheckBox x:Name="chkIncludeSubfolder" Content="Bao gồm thư mục con" Grid.Column="1" Margin="66,152,940,319" />
-        <Label x:Name="lbFileNumber" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="32,51,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
