@@ -1,14 +1,69 @@
-﻿<Window x:Class="RenameFile.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RenameFile"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="RenameFile.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Margin="51,82,108,129" Name="AllVehiclesButton" 
-                Content="{DynamicResource All_Vehicles}" Click="AllVehiclesButton_Click"/>
-
+        Title="MainWindow" Height="524.025" Width="1175.525">
+    <Window.Resources>
+        <SolidColorBrush x:Key="ListBorder" Color="#828790"/>
+        <Style x:Key="lvFile" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#FF042271"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <Themes:ListBoxChrome x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" SnapsToDevicePixels="true" Margin="0,0,-127,0">
+                            <ScrollViewer Padding="{TemplateBinding Padding}" Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}" Margin="0,0,-2,0">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Width="382"/>
+                            </ScrollViewer>
+                        </Themes:ListBoxChrome>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsGrouping" Value="true"/>
+                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="-194,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="175*"/>
+            <ColumnDefinition Width="1166*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnPath" Content="Chọn đường dẫn" HorizontalAlignment="Left" Margin="233,26,0,0" VerticalAlignment="Top" Width="142" Click="btnPath_Click" Grid.Column="1" Height="20"/>
+        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Height="23" Margin="19,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txtInput_TextChanged" Width="195" Grid.Column="1"/>
+        <CheckBox x:Name="chkKeepFile" Content="Không đổi tên file"  Grid.Column="1" Margin="66,95,940,24" />
+        <CheckBox x:Name="chkKeepFolder" Content="Không đổi tên thư mục" Grid.Column="1" Margin="66,119,940,0" />
+        <ListView x:Name="listviewFile" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="417,20,0,0" VerticalAlignment="Top" Width="257" Style="{DynamicResource lvFile}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tên cũ" Width="120" DisplayMemberBinding="{Binding OldName}" />
+                    <GridViewColumn Header="Tên mới" Width="50" DisplayMemberBinding="{Binding NewName}" />
+                    <GridViewColumn Header="Đường dẫn" Width="150" DisplayMemberBinding="{Binding Path}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <CheckBox x:Name="chkIncludeSubfolder" Content="Bao gồm thư mục con" Grid.Column="1" Margin="66,152,940,319" />
+        <Label x:Name="lbFileNumber" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="32,51,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

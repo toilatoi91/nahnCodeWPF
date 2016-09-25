@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using RenameFile.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,6 +26,10 @@ namespace RenameFile
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int sofile;
+
+        public bool NeedRefresh { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -83,5 +91,130 @@ namespace RenameFile
             }
             this.Resources.MergedDictionaries.Add(dict);
         }
+
+        private void btnPath_Click(object sender, RoutedEventArgs e)
+        {
+            listviewFile.Items.Clear();
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            dialog.Title = "Bạn hãy chọn folder mà bạn muốn rename!";
+            // fl.SelectedPath = Environment.SpecialFolder.Recent;
+            if (Directory.Exists(Properties.Settings.Default.defaultChosePath)) // nếu có đường dẫn rồi thì lấy đường dẫn đó
+            {
+                dialog.DefaultDirectory = Properties.Settings.Default.defaultChosePath;
+                //Directory a= new Directory(Directory);
+
+                // fl.RootFolder =Environment.SpecialFolder.MyPictures;
+            }
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                //lam gi thi lam
+                //ghi duong dan ra file
+                //MessageBox.Show( Path.GetFullPath(fl.SelectedPath));
+                txtInput.Text = dialog.FileName;               
+                NeedRefresh = false;
+            }
+        }
+
+        private void txtInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Properties.Settings.Default.defaultChosePath = txtInput.Text;
+            Properties.Settings.Default.Save();
+            RrefreshFilename(txtInput.Text);
+        }
+        private void RrefreshFilename(string inputText)
+        {
+            sofile = 0;
+            listviewFile.Items.Clear();
+            //listviewFile.Sorting = SortOrder.None; todo
+
+
+           
+                GetFileList(inputText);
+
+           
+
+        }
+        private void GetFileList(string dauvao)// lay danh sach file
+        {
+            try
+            {
+
+                string[] filePaths = Directory.GetFiles(dauvao);
+
+                // image list
+
+                // imageList1.ColorDepth = ColorDepth.Depth32Bit; //todo
+                //imageList1.ImageSize = new Size(16, 16);//todo
+                //listviewFile.Invoke(new MethodInvoker(() =>
+                //{
+                //    listviewFile.SmallImageList = imageList1;
+                //}));
+
+                var items = new List<MyFileInfo>();
+                // tongSofile += filePaths.Length;
+                foreach (string filename in filePaths)
+                {
+
+
+
+
+                    if (chkKeepFile.IsChecked == false)
+                    {
+
+
+                        // Set a default icon for the file.
+                        // System.Drawing.Icon iconForFile = SystemIcons.WinLogo;
+                        FileInfo info = new FileInfo(filename);
+                        var myFileInfo = new MyFileInfo() {
+                            OldName = System.IO.Path.GetFileName(filename),
+                            NewName = "",
+                            LastWriteTime = info.LastWriteTime.ToString("yyyy-MM-dd"),
+
+                        };
+
+
+
+                        //listviewFile.Invoke(new MethodInvoker(() =>
+                        //{
+                        //    listviewFile.Items.Add(item);
+                        //    sofile += 1;
+                        //    lbFileNumber.Text = String.Format("Đã load {0} file", sofile);
+                        //}));
+                        items.Add(myFileInfo);
+                    }
+                }
+
+                string[] _thuMuccon = Directory.GetDirectories(dauvao);
+                foreach (string thumucconcon in _thuMuccon)
+                {
+                    if (chkKeepFolder.IsChecked == false)
+                    {
+                        FileInfo info = new FileInfo(thumucconcon);
+                        var myFileInfo = new MyFileInfo()
+                        {
+                            OldName = System.IO.Path.GetFileName(thumucconcon),
+                            NewName = "",
+                            LastWriteTime = info.LastWriteTime.ToString("yyyy-MM-dd"),
+
+                        };
+                        items.Add(myFileInfo);
+                    }
+                    if (chkIncludeSubfolder.IsChecked == true)
+                        GetFileList(thumucconcon);
+                }
+                listviewFile.ItemsSource = items;
+                sofile+= items.Count;
+                lbFileNumber.Content = String.Format("Đã load {0} file", sofile);               
+
+            }
+            catch
+            {
+                // ignored
+            }
+            //return tongSofile;
+        }
+
+      
     }
 }
