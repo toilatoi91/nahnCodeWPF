@@ -60,6 +60,7 @@
                     <GridViewColumn Header="Tên cũ" Width="120" DisplayMemberBinding="{Binding OldName}" />
                     <GridViewColumn Header="Tên mới" Width="50" DisplayMemberBinding="{Binding NewName}" />
                     <GridViewColumn Header="Đường dẫn" Width="150" DisplayMemberBinding="{Binding Path}" />
+                    <GridViewColumn Header="Ngày cập nhật" Width="150" DisplayMemberBinding="{Binding LastWriteTime}" />
                 </GridView>
             </ListView.View>
         </ListView>

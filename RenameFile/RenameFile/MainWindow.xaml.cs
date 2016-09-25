@@ -125,7 +125,7 @@ namespace RenameFile
         private void RrefreshFilename(string inputText)
         {
             sofile = 0;
-            listviewFile.Items.Clear();
+            listviewFile.ItemsSource = null;
             //listviewFile.Sorting = SortOrder.None; todo
 
 
@@ -169,8 +169,8 @@ namespace RenameFile
                         var myFileInfo = new MyFileInfo() {
                             OldName = System.IO.Path.GetFileName(filename),
                             NewName = "",
+                            Path = filename,
                             LastWriteTime = info.LastWriteTime.ToString("yyyy-MM-dd"),
-
                         };
 
 
@@ -195,6 +195,7 @@ namespace RenameFile
                         {
                             OldName = System.IO.Path.GetFileName(thumucconcon),
                             NewName = "",
+                            Path=thumucconcon,
                             LastWriteTime = info.LastWriteTime.ToString("yyyy-MM-dd"),
 
                         };
